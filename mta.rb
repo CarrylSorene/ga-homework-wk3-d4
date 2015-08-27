@@ -16,7 +16,7 @@ station_end = gets.chomp.downcase
 puts 'Which line do you want to finish on?'
 line_end_input = gets.chomp.downcase
 
-#determine correct line in hash depending on user input 
+#determine correct line in hash depending on user input for start and end lines
 
 if line_start_input == 'n'
    line_start = :line_n
@@ -26,44 +26,69 @@ elsif line_start_input == '6'
    line_start = :line_6
 end
 
+if line_end_input == 'n'
+   line_end = :line_n
+elsif line_end_input == 'l'
+   line_end = :line_l
+elsif line_end_input == '6'
+   line_end = :line_6
+end
+
 # calculate stops - if they're on same line
 
-if line_start == :line_n && train_lines[:line_n].index.(station_start)
-  stops = train_lines[:line_n].index.(station_end) - train_lines[:line_n].index.(station_start)
-  # stops = stops.abs
+if line_start == :line_n && line_end == :line_n
+  stops = train_lines[:line_n].index(station_end) - train_lines[:line_n].index(station_start)
+  stops = stops.abs
   puts 'Your journey will include ' + stops.to_s + ' stops'
 elsif
-  line_start == :line_l && train_lines[:line_l].index.(station_start)
-  stops = train_lines[:line_l].index.(station_end) - train_lines[:line_l].index.(station_start)
-  # stops = stops.abs
+  line_start == :line_l && line_end == :line_l
+  stops = train_lines[:line_l].index(station_end) - train_lines[:line_l].index(station_start)
+  stops = stops.abs
   puts 'Your journey will include ' + stops.to_s + ' stops'
 elsif 
-  line_start == :line_6 && train_lines[:line_6].index.(station_start)
-  stops = train_lines[:line_6].index.(station_end) - train_lines[:line_6].index.(station_start)
-  # stops = stops.abs
+  line_start == :line_6 && line_end == :line_6
+  stops = train_lines[:line_6].index(station_end) - train_lines[:line_6].index(station_start)
+  stops = stops.abs
   puts 'Your journey will include ' + stops.to_s + ' stops'
 end
 
-#Find index of intersection on each array
+# #Find index of intersection on each array - confused now on how to work it out
 
-# start_us_index = train_lines(line).index('US') # use this var to calc stops from intersection - add to no of stops either side
-# end_us_index = train_lines(line).index('US')
+# start_us_index = train_lines[line_start].index('US') # use this var to calc stops from intersection - add to no of stops either side
+# end_us_index = train_lines[line_start].index('US')
 
-# if line_start == line_n && train_lines[:line_n].index.(station_start)
+# # calc both legs of journey if changing at intersection, depending on which line user starts from #better as a case (but options are all different)
 
+# if 
+#   line_start == line_n && line_end == line_l ||
+#   line_start == line_n && line_end == line_6
+# stops = 
+#   (train_lines[:line_n].index(station_end) - 
+#   train_lines[:line_n].index(end_us_index)) + 
+#   (train_lines[:line_n].index(start_us_index) - 
+#   train_lines[:line_n].index(station_start)) 
+# stops = stops.abs
+# elsif
+#   line_start == line_l && line_end == line_6 ||
+#   line_start == line_l && line_end == line_n 
+# stops = 
+#   (train_lines[:line_l].index(station_end) - 
+#   train_lines[:line_l].index(end_us_index)) + 
+#   (train_lines[:line_l].index(start_us_index) - 
+#   train_lines[:line_l].index(station_start)) 
+# stops = stops.abs
+# elsif
+  
+#   line_start == line_6 && line_end == line_n ||
+#   line_start == line_6 && line_end == line_l 
+# stops = 
+#   (train_lines[:line_6].index(station_end) - 
+#   train_lines[:line_6].index(end_us_index)) + 
+#   (train_lines[:line_6].index(start_us_index) - 
+#   train_lines[:line_6].index(station_start)) 
+# stops = stops.abs
+# end
 
-# calculate stops- if they change lines
-
-
-
-
-
-# start_index = train_lines(line).index(station_start)
-# end_index = train_lines(line).index(station_end)
-
-
-
-
-# puts 'Your journey will include ' + stop_number.to_s + ' stops'
+# puts 'Your journey will include ' + stops.to_s + ' stops'
 # changes = 'one'
-# puts ' and will include one change.'
+# puts ' and will include ' + changes + ' change.'
